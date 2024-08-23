@@ -15,6 +15,7 @@ namespace FormApp
     public partial class Form1 : Form
     {
         string _filePath = @"E:\data.json";
+        string _selectedId;
         public class Contact
         {
             public Guid id { get; set; }
@@ -39,7 +40,22 @@ namespace FormApp
             newContact.firstName = txt_firstName.Text;
             newContact.lastName = txt_lastName.Text;
             newContact.phoneNumber = txt_phoneNumber.Text;
-            contacts.Add(newContact);
+
+            if (string.IsNullOrEmpty(_selectedId))
+            {
+                
+                newContact.id = Guid.NewGuid();
+                contacts.Add(newContact);
+            }
+            else
+            {
+                var contactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == _selectedId);
+                contacts.Remove(contactToEdit);
+                newContact.id = Guid.Parse(_selectedId);
+                contacts.Add(newContact);
+                _selectedId = "";
+            }
+
             var saveResult = contactIsSaved(contacts);
             if (saveResult)
             {
@@ -78,9 +94,9 @@ namespace FormApp
                     result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
                 }
 
-                foreach(var contact in result)
+                foreach (var contact in result)
                 {
-                    if(contact.id == null)
+                    if (contact.id == null)
                     {
                         contact.id = Guid.NewGuid();
                     }
@@ -119,7 +135,7 @@ namespace FormApp
             grd_contacts.Rows.Clear();
             foreach (Contact contact in model)
             {
-                grd_contacts.Rows.Add(contact.id,contact.firstName, contact.lastName, contact.phoneNumber);
+                grd_contacts.Rows.Add(contact.id, contact.firstName, contact.lastName, contact.phoneNumber);
 
             }
         }
@@ -127,7 +143,10 @@ namespace FormApp
         private void grd_contacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var index = grd_contacts.CurrentRow.Index;
-            var id = grd_contacts.Rows[index].Cells[0].Value;
+            var id = grd_contacts.Rows[index].Cells[0].Value.ToString();
+
+            _selectedId = id;
+
             var contacts = getContacts();
             var selectedContactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == id.ToString());
 
