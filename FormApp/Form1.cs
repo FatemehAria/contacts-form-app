@@ -41,7 +41,12 @@ namespace FormApp
             newContact.phoneNumber = txt_phoneNumber.Text;
             contacts.Add(newContact);
             var saveResult = contactIsSaved(contacts);
+            if (saveResult)
+            {
+                fillGridView(contacts);
+            }
             emptyFields();
+
         }
 
         public void emptyFields()
@@ -99,6 +104,21 @@ namespace FormApp
             {
                 System.IO.File.Create(filePath);
             }
+        }
+
+        public void fillGridView(List<Contact> model)
+        {
+            grd_contacts.Rows.Clear();
+            foreach (Contact contact in model)
+            {
+                grd_contacts.Rows.Add(contact.firstName, contact.lastName, contact.phoneNumber);
+
+            }
+        }
+
+        private void grd_contacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -35,11 +35,16 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_phoneNumber = new System.Windows.Forms.TextBox();
+            this.grd_contacts = new System.Windows.Forms.DataGridView();
+            this.firstColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thirdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.grd_contacts)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_saveContact
             // 
-            this.btn_saveContact.Location = new System.Drawing.Point(265, 205);
+            this.btn_saveContact.Location = new System.Drawing.Point(229, 208);
             this.btn_saveContact.Name = "btn_saveContact";
             this.btn_saveContact.Size = new System.Drawing.Size(75, 23);
             this.btn_saveContact.TabIndex = 0;
@@ -50,7 +55,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(575, 70);
+            this.label1.Location = new System.Drawing.Point(627, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 20);
             this.label1.TabIndex = 1;
@@ -99,11 +104,48 @@
             this.txt_phoneNumber.Size = new System.Drawing.Size(157, 22);
             this.txt_phoneNumber.TabIndex = 6;
             // 
+            // grd_contacts
+            // 
+            this.grd_contacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grd_contacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.firstColumn,
+            this.secondColumn,
+            this.thirdColumn});
+            this.grd_contacts.Location = new System.Drawing.Point(229, 288);
+            this.grd_contacts.Name = "grd_contacts";
+            this.grd_contacts.RowHeadersWidth = 51;
+            this.grd_contacts.RowTemplate.Height = 24;
+            this.grd_contacts.Size = new System.Drawing.Size(416, 150);
+            this.grd_contacts.TabIndex = 7;
+            this.grd_contacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_contacts_CellContentClick);
+            // 
+            // firstColumn
+            // 
+            this.firstColumn.HeaderText = "نام";
+            this.firstColumn.MinimumWidth = 6;
+            this.firstColumn.Name = "firstColumn";
+            this.firstColumn.Width = 125;
+            // 
+            // secondColumn
+            // 
+            this.secondColumn.HeaderText = "نام خانوادگی";
+            this.secondColumn.MinimumWidth = 6;
+            this.secondColumn.Name = "secondColumn";
+            this.secondColumn.Width = 125;
+            // 
+            // thirdColumn
+            // 
+            this.thirdColumn.HeaderText = "شماره همراه";
+            this.thirdColumn.MinimumWidth = 6;
+            this.thirdColumn.Name = "thirdColumn";
+            this.thirdColumn.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.grd_contacts);
             this.Controls.Add(this.txt_phoneNumber);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txt_lastName);
@@ -115,6 +157,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Text = "فرم ثبت نام";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.grd_contacts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +172,10 @@
         private System.Windows.Forms.TextBox txt_lastName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_phoneNumber;
+        private System.Windows.Forms.DataGridView grd_contacts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn secondColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn thirdColumn;
     }
 }
 
