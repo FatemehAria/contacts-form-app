@@ -80,7 +80,7 @@ namespace FormApp
 
                 foreach(var contact in result)
                 {
-                    if(contact.id == null || contact.id == Guid.Empty)
+                    if(contact.id == null)
                     {
                         contact.id = Guid.NewGuid();
                     }
@@ -119,14 +119,21 @@ namespace FormApp
             grd_contacts.Rows.Clear();
             foreach (Contact contact in model)
             {
-                grd_contacts.Rows.Add(contact.firstName, contact.lastName, contact.phoneNumber);
+                grd_contacts.Rows.Add(contact.id,contact.firstName, contact.lastName, contact.phoneNumber);
 
             }
         }
 
         private void grd_contacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            var index = grd_contacts.CurrentRow.Index;
+            var id = grd_contacts.Rows[index].Cells[0].Value;
+            var contacts = getContacts();
+            var selectedContactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == id.ToString());
 
+            txt_firstName.Text = selectedContactToEdit.firstName;
+            txt_lastName.Text = selectedContactToEdit.lastName;
+            txt_phoneNumber.Text = selectedContactToEdit.phoneNumber;
         }
     }
 }

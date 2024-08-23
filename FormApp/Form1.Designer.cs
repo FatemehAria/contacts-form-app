@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txt_phoneNumber = new System.Windows.Forms.TextBox();
             this.grd_contacts = new System.Windows.Forms.DataGridView();
+            this.contact_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.thirdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,6 +109,7 @@
             // 
             this.grd_contacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grd_contacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.contact_id,
             this.firstColumn,
             this.secondColumn,
             this.thirdColumn});
@@ -118,6 +120,14 @@
             this.grd_contacts.Size = new System.Drawing.Size(416, 150);
             this.grd_contacts.TabIndex = 7;
             this.grd_contacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_contacts_CellContentClick);
+            // 
+            // contact_id
+            // 
+            this.contact_id.HeaderText = "شناسه";
+            this.contact_id.MinimumWidth = 6;
+            this.contact_id.Name = "contact_id";
+            this.contact_id.Visible = false;
+            this.contact_id.Width = 125;
             // 
             // firstColumn
             // 
@@ -173,6 +183,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_phoneNumber;
         private System.Windows.Forms.DataGridView grd_contacts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contact_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn secondColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thirdColumn;
