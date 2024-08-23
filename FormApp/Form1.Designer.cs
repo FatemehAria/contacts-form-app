@@ -31,10 +31,10 @@
             this.btn_saveContact = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_firstName = new System.Windows.Forms.TextBox();
+            this.txt_lastName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txt_phoneNumber = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_saveContact
@@ -45,7 +45,7 @@
             this.btn_saveContact.TabIndex = 0;
             this.btn_saveContact.Text = "تایید";
             this.btn_saveContact.UseVisualStyleBackColor = true;
-            this.btn_saveContact.Click += new System.EventHandler(this.button1_Click);
+            this.btn_saveContact.Click += new System.EventHandler(this.saveContactClickHandler);
             // 
             // label1
             // 
@@ -67,19 +67,21 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "نام خانوادگی";
             // 
-            // textBox1
+            // txt_firstName
             // 
-            this.textBox1.Location = new System.Drawing.Point(387, 67);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(157, 22);
-            this.textBox1.TabIndex = 3;
+            this.txt_firstName.Location = new System.Drawing.Point(387, 67);
+            this.txt_firstName.Name = "txt_firstName";
+            this.txt_firstName.Size = new System.Drawing.Size(157, 22);
+            this.txt_firstName.TabIndex = 3;
+            this.txt_firstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // txt_lastName
             // 
-            this.textBox2.Location = new System.Drawing.Point(387, 109);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(157, 22);
-            this.textBox2.TabIndex = 4;
+            this.txt_lastName.Location = new System.Drawing.Point(387, 109);
+            this.txt_lastName.Name = "txt_lastName";
+            this.txt_lastName.Size = new System.Drawing.Size(157, 22);
+            this.txt_lastName.TabIndex = 4;
+            this.txt_lastName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label3
             // 
@@ -90,28 +92,29 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "شماره تماس";
             // 
-            // textBox3
+            // txt_phoneNumber
             // 
-            this.textBox3.Location = new System.Drawing.Point(387, 156);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(157, 22);
-            this.textBox3.TabIndex = 6;
+            this.txt_phoneNumber.Location = new System.Drawing.Point(387, 156);
+            this.txt_phoneNumber.Name = "txt_phoneNumber";
+            this.txt_phoneNumber.Size = new System.Drawing.Size(157, 22);
+            this.txt_phoneNumber.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txt_phoneNumber);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_lastName);
+            this.Controls.Add(this.txt_firstName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_saveContact);
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Text = "فرم ثبت نام";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,10 +125,10 @@
         private System.Windows.Forms.Button btn_saveContact;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_firstName;
+        private System.Windows.Forms.TextBox txt_lastName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txt_phoneNumber;
     }
 }
 
