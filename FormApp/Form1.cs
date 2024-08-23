@@ -41,8 +41,16 @@ namespace FormApp
             newContact.phoneNumber = txt_phoneNumber.Text;
             contacts.Add(newContact);
             var saveResult = contactIsSaved(contacts);
+            emptyFields();
         }
 
+        public void emptyFields()
+        {
+            var contact = new Contact();
+            txt_firstName.Text = "";
+            txt_lastName.Text = "";
+            txt_phoneNumber.Text = "";
+        }
         public bool contactIsSaved(List<Contact> model)
         {
             try
