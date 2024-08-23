@@ -46,7 +46,6 @@ namespace FormApp
                 fillGridView(contacts);
             }
             emptyFields();
-
         }
 
         public void emptyFields()
@@ -104,6 +103,8 @@ namespace FormApp
             {
                 System.IO.File.Create(filePath);
             }
+            var contacts = getContacts();
+            fillGridView(contacts);
         }
 
         public void fillGridView(List<Contact> model)
