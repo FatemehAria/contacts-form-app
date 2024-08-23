@@ -14,7 +14,7 @@ namespace FormApp
 
     public partial class Form1 : Form
     {
-        string filePath = @"D:\data.json";
+        string filePath = @"E:\data.json";
         public class Contact
         {
             public Guid id { get; set; }
@@ -53,7 +53,7 @@ namespace FormApp
             }
             catch
             {
-                throw;
+                return false;
             }
         }
         public List<Contact> getContacts()
@@ -61,8 +61,12 @@ namespace FormApp
             var result = new List<Contact>();
             try
             {
-                var fileString = System.IO.File.ReadAllText(filePath);
-                result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
+                if (System.IO.File.Exists(filePath) && System.IO.File.ReadAllText(filePath) != "")
+                {
+                    var fileString = System.IO.File.ReadAllText(filePath);
+                    result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
+                }
+
             }
             catch
             {
