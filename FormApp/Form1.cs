@@ -34,13 +34,28 @@ namespace FormApp
 
         private void saveContactClickHandler(object sender, EventArgs e)
         {
-            var contact = new Contact();
-            contact.firstName = txt_firstName.Text;
-            contact.lastName = txt_lastName.Text;
-            contact.phoneNumber = txt_phoneNumber.Text;
-
+            var contacts = getContacts();
+            var newContact = new Contact();
+            newContact.firstName = txt_firstName.Text;
+            newContact.lastName = txt_lastName.Text;
+            newContact.phoneNumber = txt_phoneNumber.Text;
+            contacts.Add(newContact);
+            var saveResult = contactIsSaved(contacts);
         }
 
+        public bool contactIsSaved(List<Contact> model)
+        {
+            try
+            {
+                var stringModel = JsonConvert.SerializeObject(model);
+                System.IO.File.WriteAllText(filePath, stringModel);
+                return true;
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public List<Contact> getContacts()
         {
             var result = new List<Contact>();
@@ -51,7 +66,7 @@ namespace FormApp
             }
             catch
             {
-
+                throw;
             }
             return result;
         }
