@@ -50,7 +50,6 @@ namespace FormApp
 
         public void emptyFields()
         {
-            var contact = new Contact();
             txt_firstName.Text = "";
             txt_lastName.Text = "";
             txt_phoneNumber.Text = "";
@@ -77,6 +76,14 @@ namespace FormApp
                 {
                     var fileString = System.IO.File.ReadAllText(filePath);
                     result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
+                }
+
+                foreach(var contact in result)
+                {
+                    if(contact.id == null || contact.id == Guid.Empty)
+                    {
+                        contact.id = Guid.NewGuid();
+                    }
                 }
 
             }
