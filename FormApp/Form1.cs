@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,7 @@ namespace FormApp
     public partial class Form1 : Form
     {
         string filePath = @"D:\data.json";
-        class Contact
+        public class Contact
         {
             public Guid id { get; set; }
             public string firstName { get; set; }
@@ -38,6 +39,21 @@ namespace FormApp
             contact.lastName = txt_lastName.Text;
             contact.phoneNumber = txt_phoneNumber.Text;
 
+        }
+
+        public List<Contact> getContacts()
+        {
+            var result = new List<Contact>();
+            try
+            {
+                var fileString = System.IO.File.ReadAllText(filePath);
+                result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
+            }
+            catch
+            {
+
+            }
+            return result;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
