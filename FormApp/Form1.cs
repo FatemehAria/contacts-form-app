@@ -19,16 +19,15 @@ namespace FormApp
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void saveContactClickHandler(object sender, EventArgs e)
         {
+            var newContact = new Contact();
+            newContact.firstName = txt_firstName.Text;
+            newContact.lastName = txt_lastName.Text;
+            newContact.phoneNumber = txt_phoneNumber.Text;
 
-            var contactIsSaved = saveContacts();
+            var contactIsSaved = saveContacts(newContact);
+
             if (contactIsSaved.saveResult)
             {
                 fillGridView(contactIsSaved.contacts);
@@ -36,13 +35,10 @@ namespace FormApp
             emptyFields();
         }
 
-        public (bool saveResult, List<Contact> contacts) saveContacts()
+        public (bool saveResult, List<Contact> contacts) saveContacts(Contact newContact)
         {
             var contacts = _repo.getContacts();
-            var newContact = new Contact();
-            newContact.firstName = txt_firstName.Text;
-            newContact.lastName = txt_lastName.Text;
-            newContact.phoneNumber = txt_phoneNumber.Text;
+
 
             if (string.IsNullOrEmpty(_selectedId))
             {
@@ -69,13 +65,15 @@ namespace FormApp
             txt_phoneNumber.Text = "";
         }
 
-        //public bool deleteContact(string id)
-        //{
-        //    var contacts = _repo.getContacts();
-        //    var selectedContactToDelete = contacts.FirstOrDefault(contact => contact.id.ToString() == id);
-        //    contacts.Remove(selectedContactToDelete);
-        //    saveContactClickHandler(contacts);
-        //}
+        public void deleteContact(string id)
+        {
+            var contacts = _repo.getContacts();
+            var selectedContactToDelete = contacts.FirstOrDefault(contact => contact.id.ToString() == id);
+            contacts.Remove(selectedContactToDelete);
+            fillGridView(contacts);
+            emptyFields();
+        }
+
         public bool contactIsSaved(List<Contact> model)
         {
             try
@@ -88,16 +86,6 @@ namespace FormApp
             {
                 return false;
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -133,6 +121,11 @@ namespace FormApp
             txt_firstName.Text = selectedContactToEdit.firstName;
             txt_lastName.Text = selectedContactToEdit.lastName;
             txt_phoneNumber.Text = selectedContactToEdit.phoneNumber;
+        }
+
+        private void btn_deleteContact_Click(object sender, EventArgs e)
+        {
+            deleteContact(_selectedId);
         }
     }
 }

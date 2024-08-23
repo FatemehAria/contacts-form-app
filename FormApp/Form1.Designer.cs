@@ -40,6 +40,7 @@
             this.firstColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.thirdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_deleteContact = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grd_contacts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "نام";
             this.label1.UseCompatibleTextRendering = true;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -79,7 +79,6 @@
             this.txt_firstName.Name = "txt_firstName";
             this.txt_firstName.Size = new System.Drawing.Size(157, 22);
             this.txt_firstName.TabIndex = 3;
-            this.txt_firstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txt_lastName
             // 
@@ -87,7 +86,6 @@
             this.txt_lastName.Name = "txt_lastName";
             this.txt_lastName.Size = new System.Drawing.Size(157, 22);
             this.txt_lastName.TabIndex = 4;
-            this.txt_lastName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label3
             // 
@@ -150,11 +148,22 @@
             this.thirdColumn.Name = "thirdColumn";
             this.thirdColumn.Width = 125;
             // 
+            // btn_deleteContact
+            // 
+            this.btn_deleteContact.Location = new System.Drawing.Point(310, 208);
+            this.btn_deleteContact.Name = "btn_deleteContact";
+            this.btn_deleteContact.Size = new System.Drawing.Size(75, 23);
+            this.btn_deleteContact.TabIndex = 8;
+            this.btn_deleteContact.Text = "حذف";
+            this.btn_deleteContact.UseVisualStyleBackColor = true;
+            this.btn_deleteContact.Click += new System.EventHandler(this.btn_deleteContact_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_deleteContact);
             this.Controls.Add(this.grd_contacts);
             this.Controls.Add(this.txt_phoneNumber);
             this.Controls.Add(this.label3);
@@ -187,6 +196,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn firstColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn secondColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thirdColumn;
+        private System.Windows.Forms.Button btn_deleteContact;
     }
 }
 
