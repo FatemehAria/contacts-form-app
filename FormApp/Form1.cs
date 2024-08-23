@@ -14,7 +14,7 @@ namespace FormApp
         Repository _repo = new Repository();
         string _filePath = @"E:\data.json";
         string _selectedId;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +27,17 @@ namespace FormApp
 
         private void saveContactClickHandler(object sender, EventArgs e)
         {
-            
+
+            var contactIsSaved = saveContacts();
+            if (contactIsSaved.saveResult)
+            {
+                fillGridView(contactIsSaved.contacts);
+            }
+            emptyFields();
+        }
+
+        public (bool saveResult, List<Contact> contacts) saveContacts()
+        {
             var contacts = _repo.getContacts();
             var newContact = new Contact();
             newContact.firstName = txt_firstName.Text;
@@ -36,7 +46,7 @@ namespace FormApp
 
             if (string.IsNullOrEmpty(_selectedId))
             {
-                
+
                 newContact.id = Guid.NewGuid();
                 contacts.Add(newContact);
             }
@@ -50,13 +60,8 @@ namespace FormApp
             }
 
             var saveResult = contactIsSaved(contacts);
-            if (saveResult)
-            {
-                fillGridView(contacts);
-            }
-            emptyFields();
+            return (saveResult, contacts);
         }
-
         public void emptyFields()
         {
             txt_firstName.Text = "";
@@ -64,6 +69,13 @@ namespace FormApp
             txt_phoneNumber.Text = "";
         }
 
+        //public bool deleteContact(string id)
+        //{
+        //    var contacts = _repo.getContacts();
+        //    var selectedContactToDelete = contacts.FirstOrDefault(contact => contact.id.ToString() == id);
+        //    contacts.Remove(selectedContactToDelete);
+        //    saveContactClickHandler(contacts);
+        //}
         public bool contactIsSaved(List<Contact> model)
         {
             try
