@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FormApp
@@ -16,13 +12,7 @@ namespace FormApp
     {
         string _filePath = @"E:\data.json";
         string _selectedId;
-        public class Contact
-        {
-            public Guid id { get; set; }
-            public string firstName { get; set; }
-            public string lastName { get; set; }
-            public string phoneNumber { get; set; }
-        }
+        
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +60,7 @@ namespace FormApp
             txt_lastName.Text = "";
             txt_phoneNumber.Text = "";
         }
+
         public bool contactIsSaved(List<Contact> model)
         {
             try
@@ -83,6 +74,7 @@ namespace FormApp
                 return false;
             }
         }
+
         public List<Contact> getContacts()
         {
             var result = new List<Contact>();
