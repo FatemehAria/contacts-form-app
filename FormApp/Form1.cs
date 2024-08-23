@@ -1,4 +1,5 @@
 ﻿using Models;
+using Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace FormApp
 
     public partial class Form1 : Form
     {
+        Repository _repo = new Repository();
         string _filePath = @"E:\data.json";
         string _selectedId;
         
@@ -25,7 +27,8 @@ namespace FormApp
 
         private void saveContactClickHandler(object sender, EventArgs e)
         {
-            var contacts = getContacts();
+            
+            var contacts = _repo.getContacts();
             var newContact = new Contact();
             newContact.firstName = txt_firstName.Text;
             newContact.lastName = txt_lastName.Text;
@@ -75,33 +78,6 @@ namespace FormApp
             }
         }
 
-        public List<Contact> getContacts()
-        {
-            var result = new List<Contact>();
-            try
-            {
-                if (System.IO.File.Exists(_filePath) && System.IO.File.ReadAllText(_filePath) != "")
-                {
-                    var fileString = System.IO.File.ReadAllText(_filePath);
-                    result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
-                }
-
-                foreach (var contact in result)
-                {
-                    if (contact.id == null)
-                    {
-                        contact.id = Guid.NewGuid();
-                    }
-                }
-
-            }
-            catch
-            {
-                throw;
-            }
-            return result;
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -118,7 +94,7 @@ namespace FormApp
             {
                 System.IO.File.Create(_filePath);
             }
-            var contacts = getContacts();
+            var contacts = _repo.getContacts();
             fillGridView(contacts);
         }
 
@@ -139,7 +115,7 @@ namespace FormApp
 
             _selectedId = id;
 
-            var contacts = getContacts();
+            var contacts = _repo.getContacts();
             var selectedContactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == id.ToString());
 
             txt_firstName.Text = selectedContactToEdit.firstName;
