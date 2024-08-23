@@ -14,7 +14,7 @@ namespace FormApp
 
     public partial class Form1 : Form
     {
-        string filePath = @"E:\data.json";
+        string _filePath = @"E:\data.json";
         public class Contact
         {
             public Guid id { get; set; }
@@ -59,7 +59,7 @@ namespace FormApp
             try
             {
                 var stringModel = JsonConvert.SerializeObject(model);
-                System.IO.File.WriteAllText(filePath, stringModel);
+                System.IO.File.WriteAllText(_filePath, stringModel);
                 return true;
             }
             catch
@@ -72,9 +72,9 @@ namespace FormApp
             var result = new List<Contact>();
             try
             {
-                if (System.IO.File.Exists(filePath) && System.IO.File.ReadAllText(filePath) != "")
+                if (System.IO.File.Exists(_filePath) && System.IO.File.ReadAllText(_filePath) != "")
                 {
-                    var fileString = System.IO.File.ReadAllText(filePath);
+                    var fileString = System.IO.File.ReadAllText(_filePath);
                     result = JsonConvert.DeserializeObject<List<Contact>>(fileString);
                 }
 
@@ -106,9 +106,9 @@ namespace FormApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists(filePath))
+            if (!System.IO.File.Exists(_filePath))
             {
-                System.IO.File.Create(filePath);
+                System.IO.File.Create(_filePath);
             }
             var contacts = getContacts();
             fillGridView(contacts);
