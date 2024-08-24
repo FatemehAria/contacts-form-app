@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Repositories;
 using Models;
+using Services;
 
 namespace MVCApp.Controllers
 {
@@ -15,5 +16,13 @@ namespace MVCApp.Controllers
 
             return Json(contacts, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult saveContact(Contact model)
+        {
+            Service _service = new Service();
+            var result = _service.saveContacts(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

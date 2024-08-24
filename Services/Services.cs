@@ -50,5 +50,13 @@ namespace Services
 
             return (saveResult, contacts);
         }
+
+        public Contact getContactById(string id)
+        {
+
+            var contacts = _repo.getContacts();
+            var contact = contacts.FirstOrDefault(c => c.id.ToString() == id.ToString());
+            return contact;
+        }
     }
 }
