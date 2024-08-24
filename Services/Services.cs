@@ -29,6 +29,7 @@ namespace Services
         public (bool saveResult, List<Contact> contacts) saveContacts(Contact newContact)
         {
             var contacts = _repo.getContacts();
+
             if (newContact.id != null)
             {
                 _selectedId = newContact.id.ToString();
@@ -59,6 +60,23 @@ namespace Services
             var contacts = _repo.getContacts();
             var contact = contacts.FirstOrDefault(c => c.id.ToString() == id);
             return contact;
+        }
+
+        public bool deleteContactById(string id)
+        {
+            try
+            {
+                var contacts = _repo.getContacts();
+                var selectedContactToDelete = contacts.FirstOrDefault(contact => contact.id.ToString() == id);
+                contacts.Remove(selectedContactToDelete);
+                string json = JsonConvert.SerializeObject(contacts, Formatting.Indented);
+                System.IO.File.WriteAllText(_filePath, json);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
