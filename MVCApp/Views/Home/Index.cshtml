@@ -4,6 +4,7 @@
 }
 
 <main class="d-flex flex-column gap-5">
+    <p id="msg_box"></p>
     <form id="contact_form" class="d-grid gap-4 w-50 mx-auto my-3 shadow shadow-sm p-4" onsubmit="saveNewContact(event)">
         <div class="d-flex align-items-center gap-2">
             <label for="first_name" class="form-label">نام</label>
@@ -63,7 +64,7 @@
                 html += '<td>' + contacts[i].phoneNumber + '</td>';
                 html += '<td><div class="btn-group">';
                 html += '<button class="btn btn-primary" onclick="getContactById(' + "'" + contacts[i].id + "'" + ') ">edit</button>';
-                html += '<button class="btn btn-danger">delete</button>';
+                html += '<button class="btn btn-danger" onclick="deleteContact(' + "'" + contacts[i].id + "'" + ')">delete</button>';
                 html += '</td></div>';
                 html += '</tr>';
             }
@@ -110,6 +111,19 @@
         const data = await res.json();
 
         console.log("saved contact", data);
+    }
+
+    const deleteContact = async (id) => {
+        var url = '/PhoneBook/deleteById/' + id;
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            document.querySelector("#msg_box").innerHTML = "کاربر با موفقیت حذف شد";
+        } catch {
+            document.querySelector("#msg_box").innerHTML = "خطا در حذف کاربر";
+        }
+
+
     }
 
     showData();
