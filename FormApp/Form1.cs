@@ -1,11 +1,11 @@
 ﻿using Models;
 using Repositories;
+using Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Services;
 
 namespace FormApp
 {
@@ -14,22 +14,21 @@ namespace FormApp
     {
         Repository _repo = new Repository();
         Service _service = new Service();
-        //string _filePath = @"E:\data.json";
-        //string _selectedId;
         
+        string _selectedId;
+
         public Form1()
         {
             InitializeComponent();
         }
         private void saveContactClickHandler(object sender, EventArgs e)
         {
-            
             var newContact = new Contact();
             newContact.firstName = txt_firstName.Text;
             newContact.lastName = txt_lastName.Text;
             newContact.phoneNumber = txt_phoneNumber.Text;
 
-            var contactIsSaved = _service.saveContacts(newContact);
+            var contactIsSaved = saveContacts(newContact);
 
             if (contactIsSaved.saveResult)
             {
@@ -38,6 +37,30 @@ namespace FormApp
             emptyFields();
         }
 
+        public (bool saveResult, List<Contact> contacts) saveContacts(Contact newContact)
+        {
+            var contacts = _repo.getContacts();
+
+
+            if (string.IsNullOrEmpty(_selectedId))
+            {
+
+                newContact.id = Guid.NewGuid();
+                contacts.Add(newContact);
+            }
+            else
+            {
+                var contactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == _selectedId);
+                contacts.Remove(contactToEdit);
+                newContact.id = Guid.Parse(_selectedId);
+                contacts.Add(newContact);
+                _selectedId = "";
+            }
+
+            var saveResult = _service.contactIsSaved(contacts);
+
+            return (saveResult, contacts);
+        }
         public void emptyFields()
         {
             txt_firstName.Text = "";
@@ -53,6 +76,8 @@ namespace FormApp
             fillGridView(contacts);
             emptyFields();
         }
+
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -79,7 +104,7 @@ namespace FormApp
             var index = grd_contacts.CurrentRow.Index;
             var id = grd_contacts.Rows[index].Cells[0].Value.ToString();
 
-            _service._selectedId = id;
+            _selectedId = id;
 
             var contacts = _repo.getContacts();
             var selectedContactToEdit = contacts.FirstOrDefault(contact => contact.id.ToString() == id.ToString());
@@ -91,7 +116,7 @@ namespace FormApp
 
         private void btn_deleteContact_Click(object sender, EventArgs e)
         {
-            deleteContact(_service._selectedId);
+            deleteContact(_selectedId);
         }
     }
 }

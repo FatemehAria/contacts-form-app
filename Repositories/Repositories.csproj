@@ -52,6 +52,10 @@
       <Project>{f5643e8c-6c73-441f-917f-20ba31925ed8}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{3d609f9a-4bf3-4459-8a61-b2eb034270eb}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
