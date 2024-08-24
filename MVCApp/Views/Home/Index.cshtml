@@ -4,7 +4,7 @@
 }
 
 <main class="d-flex flex-column gap-5">
-    <form id="contact_form" class="d-grid gap-4 w-50 mx-auto my-3 shadow shadow-sm p-4">
+    <form id="contact_form" class="d-grid gap-4 w-50 mx-auto my-3 shadow shadow-sm p-4" onsubmit="saveNewContact(event)">
         <div class="d-flex align-items-center gap-2">
             <label for="first_name" class="form-label">نام</label>
             <input value="" id="first_name" type="text" class="form-control" placeholder="نام خود را وارد کنید" />
@@ -17,6 +17,7 @@
             <label for="phone_number" class="form-label">شماره تماس</label>
             <input value="" id="phone_number" type="text" class="form-control" placeholder="شماره تماس را وارد کنید" />
         </div>
+        <input value="" id="hidden_id" hidden />
         <div class="d-flex justify-content-end">
             <button class="btn btn-success">تایید</button>
         </div>
@@ -78,11 +79,37 @@
         try {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data);
+            document.querySelector("#first_name").value = data.firstName;
+            document.querySelector("#last_name").value = data.lastName;
+            document.querySelector("#phone_number").value = data.phoneNumber;
+            document.querySelector("#hidden_id").value = data.id;
+            //console.log("single",data);
             return data;
         } catch {
             console.log("error getting data")
         }
+    }
+
+    async function saveNewContact(event) {
+        event.preventDefault();
+        var url = '/PhoneBook/saveContact';
+        var model = {};
+        model.firstName = document.querySelector("#first_name").value;
+        model.lastName = document.querySelector("#last_name").value;
+        model.phoneNumber = document.querySelector("#phone_number").value;
+        model.id = document.querySelector("#hidden_id").value;
+
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ model })
+        });
+
+        const data = await res.json();
+
+        console.log("saved contact", data);
     }
 
     showData();

@@ -31,6 +31,10 @@ namespace MVCApp.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        //public ActionResult deleteById(string Id)
+        //{
+        //    var result = _service.DeleteContact(Id);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

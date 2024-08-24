@@ -29,7 +29,10 @@ namespace Services
         public (bool saveResult, List<Contact> contacts) saveContacts(Contact newContact)
         {
             var contacts = _repo.getContacts();
-
+            if (newContact.id != null)
+            {
+                _selectedId = newContact.id.ToString();
+            }
 
             if (string.IsNullOrEmpty(_selectedId))
             {
@@ -53,7 +56,6 @@ namespace Services
 
         public Contact getContactById(string id)
         {
-
             var contacts = _repo.getContacts();
             var contact = contacts.FirstOrDefault(c => c.id.ToString() == id);
             return contact;
