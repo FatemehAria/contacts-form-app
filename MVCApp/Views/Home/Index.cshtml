@@ -109,8 +109,9 @@
         });
 
         const data = await res.json();
-
+        clearFields();
         console.log("saved contact", data);
+
     }
 
     const deleteContact = async (id) => {
@@ -126,6 +127,12 @@
 
     }
 
+    const clearFields = () => {
+        document.querySelector("#first_name").value = "";
+        document.querySelector("#last_name").value = "";
+        document.querySelector("#phone_number").value = "";
+        document.querySelector("#hidden_id").value = "";
+    }
     showData();
 
 </script>
