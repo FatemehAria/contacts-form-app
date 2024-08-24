@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Repositories;
+using Models;
 
 namespace MVCApp.Controllers
 {
@@ -10,12 +12,16 @@ namespace MVCApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Repository _rep = new Repository();
+            List<Contact> contacts = _rep.getContacts();
+
+            return View(contacts);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+           
 
             return View();
         }
