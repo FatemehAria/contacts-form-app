@@ -20,10 +20,8 @@ namespace MVCApp.Controllers
 
         public ActionResult getContactById(string id)
         {
-            Repository _rep = new Repository();
-            Contact contacts = _service.getContactById(id);
-
-            return Json(contacts, JsonRequestBehavior.AllowGet);
+            Contact contact = _service.getContactById(id);
+            return Json(contact, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult saveContact(Contact model)

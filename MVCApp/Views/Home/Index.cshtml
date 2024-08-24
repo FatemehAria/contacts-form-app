@@ -7,11 +7,11 @@
     <form id="contact_form" class="d-grid gap-4 w-50 mx-auto my-3 shadow shadow-sm p-4">
         <div class="d-flex align-items-center gap-2">
             <label for="first_name" class="form-label">نام</label>
-            <input value="" id="first_name" type="text" class="form-control" placeholder="نام خود را وارد کنید"/>
+            <input value="" id="first_name" type="text" class="form-control" placeholder="نام خود را وارد کنید" />
         </div>
         <div class="d-flex align-items-center gap-2">
             <label for="last_name" class="form-label">نام خانوادگی</label>
-            <input value="" id="last_name" type="text" class="form-control" placeholder="نام خانوادگی خود را وارد کنید"/>
+            <input value="" id="last_name" type="text" class="form-control" placeholder="نام خانوادگی خود را وارد کنید" />
         </div>
         <div class="d-flex align-items-center gap-2">
             <label for="phone_number" class="form-label">شماره تماس</label>
@@ -28,6 +28,7 @@
                 <th>نام</th>
                 <th>نام خانوادگی</th>
                 <th>شماره همراه</th>
+                <th>عملیات</th>
             </tr>
         </thead>
         <tbody id="tbl_body">
@@ -37,10 +38,11 @@
 
 <script>
 
-    let url = "/PhoneBook/getContacts";
     let html = "";
 
     const getAllContacts = async () => {
+        let url = "/PhoneBook/getContacts";
+
         try {
             const res = await fetch(url);
             const data = await res.json();
@@ -58,6 +60,10 @@
                 html += '<td>' + contacts[i].firstName + '</td>';
                 html += '<td>' + contacts[i].lastName + '</td>';
                 html += '<td>' + contacts[i].phoneNumber + '</td>';
+                html += '<td><div class="btn-group">';
+                html += '<button class="btn btn-primary" onclick="getContactById(' + "'" + contacts[i].id + "'" + ') ">edit</button>';
+                html += '<button class="btn btn-danger">delete</button>';
+                html += '</td></div>';
                 html += '</tr>';
             }
             document.querySelector("#tbl_body").innerHTML = html;
@@ -65,6 +71,18 @@
             document.querySelector("#tbl_body").innerHTML = "خطا در نمایش اطلاعات.";
         }
 
+    }
+
+    const getContactById = async (id) => {
+        var url = "/PhoneBook/getContactById/" + id;
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
+            return data;
+        } catch {
+            console.log("error getting data")
+        }
     }
 
     showData();
