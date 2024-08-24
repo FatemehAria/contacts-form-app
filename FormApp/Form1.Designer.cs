@@ -94,7 +94,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 16);
             this.label3.TabIndex = 5;
-            this.label3.Text = "شماره تماس";
+            this.label3.Text = "شماره همراه";
             // 
             // txt_phoneNumber
             // 
@@ -111,11 +111,11 @@
             this.firstColumn,
             this.secondColumn,
             this.thirdColumn});
-            this.grd_contacts.Location = new System.Drawing.Point(229, 288);
+            this.grd_contacts.Location = new System.Drawing.Point(216, 288);
             this.grd_contacts.Name = "grd_contacts";
             this.grd_contacts.RowHeadersWidth = 51;
             this.grd_contacts.RowTemplate.Height = 24;
-            this.grd_contacts.Size = new System.Drawing.Size(416, 150);
+            this.grd_contacts.Size = new System.Drawing.Size(429, 150);
             this.grd_contacts.TabIndex = 7;
             this.grd_contacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_contacts_CellContentClick);
             // 
