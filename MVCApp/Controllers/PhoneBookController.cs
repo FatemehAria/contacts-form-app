@@ -8,6 +8,7 @@ namespace MVCApp.Controllers
 {
     public class PhoneBookController : Controller
     {
+        Service _service = new Service();
 
         public ActionResult getContacts()
         {
@@ -16,9 +17,18 @@ namespace MVCApp.Controllers
 
             return Json(contacts, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult getContactById(string id)
+        {
+            Repository _rep = new Repository();
+            Contact contacts = _service.getContactById(id);
+
+            return Json(contacts, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult saveContact(Contact model)
         {
-            Service _service = new Service();
+            
             var result = _service.saveContacts(model);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
