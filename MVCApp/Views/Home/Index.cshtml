@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @{
+            @*@{
                 foreach (var item in Model)
                 {
                     <tr>
@@ -22,7 +22,27 @@
                         <td>@item.phoneNumber</td>
                     </tr>
                 }
-            }
+            }*@
         </tbody>
     </table>
 </main>
+
+<script>
+
+    let url = "/Home/GetContacts";
+    let html = "";
+    const getAllContacts = async () => {
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
+            return data;
+        } catch {
+            console.log("error getting data");
+        }
+    }
+
+    const contacts = getAllContacts();
+
+    
+</script>

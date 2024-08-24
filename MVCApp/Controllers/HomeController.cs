@@ -12,16 +12,22 @@ namespace MVCApp.Controllers
     {
         public ActionResult Index()
         {
+
+            return View();
+        }
+
+        public ActionResult getContacts()
+        {
             Repository _rep = new Repository();
             List<Contact> contacts = _rep.getContacts();
 
-            return View(contacts);
+            return Json(contacts, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-           
+
 
             return View();
         }
