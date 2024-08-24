@@ -16,13 +16,13 @@ namespace MVCApp.Controllers
             return View();
         }
 
-        public ActionResult getContacts()
-        {
-            Repository _rep = new Repository();
-            List<Contact> contacts = _rep.getContacts();
+        //public ActionResult getContacts()
+        //{
+        //    Repository _rep = new Repository();
+        //    List<Contact> contacts = _rep.getContacts();
 
-            return Json(contacts, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(contacts, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult About()
         {
