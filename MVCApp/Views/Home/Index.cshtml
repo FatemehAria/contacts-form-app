@@ -12,17 +12,17 @@
                 <th>شماره همراه</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbl_body">
             @*@{
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.firstName</td>
-                        <td>@item.lastName</td>
-                        <td>@item.phoneNumber</td>
-                    </tr>
-                }
-            }*@
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.firstName</td>
+                            <td>@item.lastName</td>
+                            <td>@item.phoneNumber</td>
+                        </tr>
+                    }
+                }*@
         </tbody>
     </table>
 </main>
@@ -31,18 +31,34 @@
 
     let url = "/Home/GetContacts";
     let html = "";
+
     const getAllContacts = async () => {
         try {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data);
             return data;
         } catch {
-            console.log("error getting data");
+            document.querySelector("#tbl_body").innerHTML = "خطا در دریافت اطلاعات.";
         }
     }
 
-    const contacts = getAllContacts();
+    const showData = async () => {
+        try {
+            const contacts = await getAllContacts();
+            for (let i = 0; i < contacts.length; i++) {
+                html += '<tr>';
+                html += '<td>' + contacts[i].firstName + '</td>';
+                html += '<td>' + contacts[i].lastName + '</td>';
+                html += '<td>' + contacts[i].phoneNumber + '</td>';
+                html += '</tr>';
+            }
+            document.querySelector("#tbl_body").innerHTML = html;
+        } catch {
+            document.querySelector("#tbl_body").innerHTML = "خطا در نمایش اطلاعات.";
+        }
 
-    
+    }
+
+    showData();
+
 </script>
