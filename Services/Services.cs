@@ -29,10 +29,15 @@ namespace Services
         public (bool saveResult, List<Contact> contacts) saveContacts(Contact newContact)
         {
             var contacts = _repo.getContacts();
+            _selectedId = string.Empty;
 
-            if (newContact.id != null)
+            if (newContact.id.ToString() != "00000000-0000-0000-0000-000000000000")
             {
                 _selectedId = newContact.id.ToString();
+            }
+            else
+            {
+                _selectedId = string.Empty;
             }
 
             if (string.IsNullOrEmpty(_selectedId))
@@ -47,7 +52,7 @@ namespace Services
                 contacts.Remove(contactToEdit);
                 newContact.id = Guid.Parse(_selectedId);
                 contacts.Add(newContact);
-                _selectedId = "";
+                _selectedId = string.Empty;
             }
 
             var saveResult = contactIsSaved(contacts);

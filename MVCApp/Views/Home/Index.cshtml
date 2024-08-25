@@ -4,7 +4,7 @@
 }
 
 <main class="d-flex flex-column gap-5">
-    <p id="msg_box"></p>
+    <p id="msg_box d-flex justify-content-end"></p>
     <form id="contact_form" class="d-grid gap-4 w-50 mx-auto my-3 shadow shadow-sm p-4" onsubmit="saveNewContact(event)">
         <div class="d-flex align-items-center gap-2">
             <label for="first_name" class="form-label">نام</label>
@@ -22,7 +22,6 @@
         <div class="d-flex justify-content-end">
             <button class="btn btn-success">تایید</button>
         </div>
-        @*<button>حذف</button>*@
     </form>
     <table class="w-100 text-center">
         <thead>
@@ -48,15 +47,16 @@
         try {
             const res = await fetch(url);
             const data = await res.json();
+            showData(data);
             return data;
         } catch {
             document.querySelector("#tbl_body").innerHTML = "خطا در دریافت اطلاعات.";
         }
     }
 
-    const showData = async () => {
+    const showData = (contacts) => {
         try {
-            const contacts = await getAllContacts();
+            html = "";
             for (let i = 0; i < contacts.length; i++) {
                 html += '<tr>';
                 html += '<td>' + contacts[i].firstName + '</td>';
@@ -74,6 +74,8 @@
         }
 
     }
+
+    getAllContacts();
 
     const getContactById = async (id) => {
         var url = "/PhoneBook/getContactById/" + id;
@@ -109,6 +111,7 @@
         });
 
         const data = await res.json();
+        getAllContacts();
         clearFields();
         console.log("saved contact", data);
 
@@ -120,6 +123,7 @@
             const res = await fetch(url);
             const data = await res.json();
             document.querySelector("#msg_box").innerHTML = "کاربر با موفقیت حذف شد";
+            getAllContacts();
         } catch {
             document.querySelector("#msg_box").innerHTML = "خطا در حذف کاربر";
         }
@@ -133,6 +137,6 @@
         document.querySelector("#phone_number").value = "";
         document.querySelector("#hidden_id").value = "";
     }
-    showData();
+
 
 </script>
