@@ -220,8 +220,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Models.csproj">
-      <Project>{f5643e8c-6c73-441f-917f-20ba31925ed8}</Project>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{ccadcbd8-634a-45d6-a7f6-8ed028f97674}</Project>
       <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\Repositories.csproj">
