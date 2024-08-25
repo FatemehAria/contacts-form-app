@@ -122,14 +122,14 @@
         try {
             const res = await fetch(url);
             const data = await res.json();
+            if (data) {
+                getAllContacts();
+            }
             document.querySelector("#msg_box").innerHTML = "کاربر با موفقیت حذف شد";
-            getAllContacts();
         } catch {
             document.querySelector("#msg_box").innerHTML = "خطا در حذف کاربر";
         }
-
-
-    }
+    };
 
     const clearFields = () => {
         document.querySelector("#first_name").value = "";
